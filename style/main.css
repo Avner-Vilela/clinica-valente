@@ -231,7 +231,7 @@ header {
 
 /* Tablets e telas menores */
 @media (max-width: 768px) {
-    /* Ajustes da seção sobre */
+    /* Ajustes da seção sobre (mantidos) */
     .sobre-grid {
         flex-direction: column;
     }
@@ -245,11 +245,11 @@ header {
         margin-top: 12px;
     }
 
-    /* Ajustes do HEADER para MOBILE (Corrige alinhamento vertical) */
+    /* Ajustes do HEADER para MOBILE (Corrige alinhamento vertical e flexibilidade) */
     header {
         height: auto; /* Permite que o conteúdo defina a altura */
-        padding-bottom: 5px; /* Ajuste o padding para aproximar a nav da borda */
-        justify-content: flex-start; /* Garante que a nav fique embaixo da logo */
+        padding-bottom: 5px; 
+        justify-content: flex-start;
     }
     
     header img {
@@ -259,15 +259,20 @@ header {
 
     /* Ajustes do cabeçalho mantendo layout horizontal */
     .header-nav {
-        justify-content: center;
+        justify-content: space-between; /* Distribui o espaço entre itens */
         padding: 10px 15px;
         gap: 8px;
-        margin-top: auto; /* EMPURRA A NAVEGAÇÃO PARA O FUNDO DO HEADER */
+        margin-top: auto;
+        flex-wrap: nowrap; /* Impede a quebra de linha de toda a nav */
     }
 
     .header-nav .nav-button {
-        min-width: 105px;
-        padding: 8px 10px;
+        /* Torna os botões flexíveis e capazes de encolher */
+        min-width: unset; 
+        flex-grow: 1; 
+        flex-shrink: 1; 
+        width: auto; 
+        padding: 8px 5px; /* Reduz o padding horizontal */
         font-size: 13px;
         margin: 0 2px;
     }
@@ -276,43 +281,48 @@ header {
         gap: 12px;
         margin-left: 10px;
         padding-right: 5px;
+        flex-shrink: 0; /* Impede que os ícones sociais encolham demais */
     }
 
     header {
-        height: auto; /* Sobrescreve a altura fixa no mobile */
+        height: auto; 
     }
 }
 
 /* Telas muito pequenas (MOBILE: CORREÇÃO DE QUEBRA DE NAVEGAÇÃO) */
 @media (max-width: 480px) {
+    
+    header {
+        height: auto; /* Remove altura fixa para evitar corte */
+        padding-bottom: 5px;
+    }
+
     .header-nav {
-        padding: 8px 5px; /* Reduz o padding lateral */
-        gap: 4px; /* Reduz o espaçamento entre itens */
-        flex-wrap: nowrap; /* Garante que os itens não quebrem linha */
+        /* Força a compactação máxima para a navegação + ícones */
+        padding: 8px 5px; 
+        gap: 2px; /* Reduz drasticamente o espaçamento */
+        flex-wrap: nowrap; 
     }
 
     .header-nav .nav-button {
-        min-width: 75px; /* Reduz o tamanho mínimo do botão */
-        padding: 6px 4px; /* Reduz o padding */
-        font-size: 11px; /* Diminui a fonte */
+        /* Ajuste máximo para caber 2 botões + 3 ícones */
+        padding: 6px 2px; /* Reduz o padding ao mínimo */
+        font-size: 10px; /* Diminui a fonte */
         margin: 0 1px;
     }
 
     .social-icons {
-        gap: 6px; /* Reduz o espaçamento entre ícones */
+        gap: 4px; /* Reduz o espaçamento entre ícones */
         margin-left: 4px;
         padding-right: 2px;
+        flex-shrink: 0;
     }
 
     /* Reduz o tamanho dos ícones em telas muito pequenas */
     .social-icon {
-        font-size: 16px; /* Ícone um pouco menor */
-        padding: 4px;
-        width: 16px;
-    }
-
-    header {
-        height: 180px;
+        font-size: 14px; 
+        padding: 2px;
+        width: 14px;
     }
 }
 
